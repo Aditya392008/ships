@@ -1,24 +1,47 @@
-var sprites=[];
-var s1,s2,s3,s4 
+var sea,ship;
+var seaImg,shipImg;
 
+function preload(){
+  //uncomment the code to add animation to ship 
 
-function setup() 
-{
+  //shipImg1 = loadAnimation("ship-1.png");
+  //shipImg1 = loadAnimation("ship-1.png");
+  //shipImg1 = loadAnimation("ship-1");
+  shipImg1 = loadAnimation("ship-1.png","ship-2.png","ship-1.png","ship-2.png");
+  //shipImg1 = loadAnimation("ship-1","ship-2","ship-1","ship-2");
+  
+  seaImg = loadImage("sea.png");
+}
+
+function setup(){
   createCanvas(400,400);
-  s1=createSprite(140,200,10,10);
-  s2=createSprite(190,300,10,10);
-  s3=createSprite(250,110,10,10);
-  s4=createSprite(330,120,10,10);
+  background("blue");
 
-  sprites=[s1,s2,s3,s4];
-  console.log(sprites[2].position.x);
-  console.log(sprites[2].position.y);
+  // Moving background
+  sea=createSprite(400,200);
+  sea.addImage(seaImg);
+  sea.velocityX = -5;
+  sea.scale=0.3;
+
+  
+  ship = createSprite(130,200,30,30);
+  ship.addAnimation("movingShip",shipImg1);
+  ship.scale =0.25;
+  
 }
 
-function draw() 
-{
-background(51);
+function draw() {
+  background(0);
+  sea.velocityX = -3;
 
-drawSprites();
+  //uncomment code to reset the background
+  if(sea.x < 0){
+    sea.x = 0;
+    sea.x = sea.width;
+    sea.x = sea.width/8;
+    sea.y = height;
+  }
+
+ 
+  drawSprites();
 }
-
